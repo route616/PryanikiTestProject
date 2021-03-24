@@ -20,10 +20,8 @@ class ViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.frame = self.view.bounds
-        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         return collectionView
     }()
 
@@ -31,22 +29,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(collectionView)
-        viewModel = ViewModel()
-        NetworkManager.shared.fetchData(with: printTestJSON, and: printError)
     }
-
-    private func printTestJSON(response: Response) {
-        print(response)
-    }
-
-    private func printError(error: String) {
-        print(error)
-    }
-}
-
-// MARK: - UICollectionViewDelegate
-extension ViewController: UICollectionViewDelegate {
-    
 }
 
 // MARK: - UICollectionViewDataSource
@@ -54,16 +37,36 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(
         _ collectionView: UICollectionView, numberOfItemsInSection section: Int
     ) -> Int {
-        return 1
+        return viewModel?.model?.view.count ?? 0
     }
 
     func collectionView(
         _ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        let size = CGSize(width: view.frame.width, height: view.frame.height / 2)
-        cell.frame.size = size
-        cell.contentView.backgroundColor = .systemRed
-        return cell
+        guard let model = self.viewModel?.model else { return UICollectionViewCell() }
+        switch model.view[indexPath.item] {
+        case "hz":
+            let cell = TextCollectionViewCell()
+            cell.textLabel.text = model.data[indexPath.item].data.text
+            return cell
+
+        case "selector":
+            guard let variants = model.data[indexPath.item].data.variants else { 
+                return UICollectionViewCell() 
+            }
+            var items = [Int: String]()
+            for item in variants {
+                items[item.id] = item.text
+            }
+            let selector = UISegmentedControl()
+            let cell = SelectorCollectionViewCell()
+            return cell
+            
+        case "picture":
+            let cell = ImageCollectionViewCell()
+            return cell
+        default:
+            return UICollectionViewCell()
+        } // switch
     }
 }
