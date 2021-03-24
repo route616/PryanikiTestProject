@@ -1,11 +1,11 @@
 //
-//  Model.swift
+//  Response.swift
 //  PryanikiTestProject
 //
 //  Created by Игорь on 20.03.2021.
 //
 
-struct Model: Codable {
+struct Response: Codable {
     let data: [Object]
     let view: [String]
 }

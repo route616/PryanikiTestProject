@@ -8,23 +8,23 @@
 import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
-    var imageView: UIImageView
+    static let identifier = "Image Cell"
+
+    lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.center = self.contentView.center
+        imageView.frame.size = self.contentView.frame.size
+        imageView.sizeToFit()
+        return imageView
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupCell()
+        contentView.addSubview(imageView)
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupCell()
-    }
-
-    private func setupCell() {
-        imageView = UIImageView()
-        imageView.center = contentView.center
-        imageView.frame.size = contentView.frame.size
-        imageView.sizeToFit()
         contentView.addSubview(imageView)
     }
 }

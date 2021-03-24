@@ -8,7 +8,9 @@
 import UIKit
 
 class SelectorCollectionViewCell: UICollectionViewCell {
-    var selector: UISegmentedControl
+    static let identifier = "Selector Cell"
+
+    var selector: UISegmentedControl!
 
     override init(frame: CGRect) {
         super.init(frame: frame)

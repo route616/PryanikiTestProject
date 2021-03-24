@@ -8,7 +8,9 @@
 import UIKit
 
 class TextCollectionViewCell: UICollectionViewCell {
-    var textLabel: UILabel
+    static let identifier = "Text Cell"
+
+    var textLabel: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
