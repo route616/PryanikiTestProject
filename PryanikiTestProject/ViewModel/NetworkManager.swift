@@ -19,11 +19,4 @@ final class NetworkManager {
             handle(value)
         }
     }
-
-    func fetchImage(url: String, handle: @escaping (Data) -> Void) {
-        AF.download(url).responseData { (response) in
-            guard let data = response.value else { return }
-            handle(data)
-        }
-    }
 }

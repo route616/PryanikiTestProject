@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     // MARK: - ViewModel
     private var viewModel: ViewModel? {
         didSet {
-            guard let _ = self.viewModel else { return }
+            guard let _ = viewModel else { return }
             collectionView.reloadData()
         }
     }
@@ -20,7 +20,15 @@ class ViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        let cv = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
+        layout.itemSize = CGSize(width: view.frame.width, height: view.frame.height / 4)
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.register(
+            CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier
+        )
+        cv.frame.size = CGSize(width: view.bounds.width, height: view.bounds.height)
+        cv.delegate = self
+        cv.dataSource = self
+        cv.backgroundColor = .white
         return cv
     }()
 
@@ -28,7 +36,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = ViewModel()
+        viewModel?.delegate = self
         view.addSubview(collectionView)
+    }
+}
+
+// MARK: - ViewModelDelegate
+extension ViewController: ViewModelDelegate {
+    func didFinishFetchingData() {
+        collectionView.reloadData()
+    }
+}
+
+//MARK: - UICollectionViewDelegate
+extension ViewController: UICollectionViewDelegate {
+    func collectionView(
+        _ collectionView: UICollectionView, canEditItemAt indexPath: IndexPath
+    ) -> Bool {
+        return false
     }
 }
 
@@ -43,14 +68,19 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(
         _ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        guard let cellViewModel = self.viewModel?.cells[indexPath.item] else {
+        guard let cellViewModel = viewModel?.cells[indexPath.item] else {
             return UICollectionViewCell()
         }
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: CollectionViewCell.identifier, for: indexPath
-        ) as! CollectionViewCell
+        guard
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: CollectionViewCell.identifier, for: indexPath
+            ) as? CollectionViewCell
+        else {
+            return UICollectionViewCell()
+        }
         cell.image = cellViewModel.image
         cell.text = cellViewModel.text
+        cell.selectedID = cellViewModel.selectedID
         cell.selector = cellViewModel.variants
         return cell
     }

@@ -10,6 +10,7 @@
 		788B6DEB260CB73B00AF2E84 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788B6DEA260CB73B00AF2E84 /* CollectionViewCell.swift */; };
 		788B6DEE260CC1E300AF2E84 /* CollectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788B6DED260CC1E300AF2E84 /* CollectionCellViewModel.swift */; };
 		78A9A8E5260B5A36003B7B72 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A9A8E4260B5A36003B7B72 /* NetworkManager.swift */; };
+		78D01388260D30E8004053A7 /* ViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D01387260D30E8004053A7 /* ViewModelDelegate.swift */; };
 		78D8E2B2260656A700DBC662 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D8E2B1260656A700DBC662 /* ViewModel.swift */; };
 		78D8E2B92606602E00DBC662 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D8E2B82606602E00DBC662 /* Response.swift */; };
 		78D8E2BD260660B400DBC662 /* Sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 78D8E2BC260660B400DBC662 /* Sample.json */; };
@@ -26,6 +27,7 @@
 		788B6DEA260CB73B00AF2E84 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		788B6DED260CC1E300AF2E84 /* CollectionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellViewModel.swift; sourceTree = "<group>"; };
 		78A9A8E4260B5A36003B7B72 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		78D01387260D30E8004053A7 /* ViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelDelegate.swift; sourceTree = "<group>"; };
 		78D8E2B1260656A700DBC662 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		78D8E2B82606602E00DBC662 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		78D8E2BC260660B400DBC662 /* Sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Sample.json; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				78D8E2B1260656A700DBC662 /* ViewModel.swift */,
+				78D01387260D30E8004053A7 /* ViewModelDelegate.swift */,
 				788B6DED260CC1E300AF2E84 /* CollectionCellViewModel.swift */,
 				78A9A8E4260B5A36003B7B72 /* NetworkManager.swift */,
 			);
@@ -252,6 +255,7 @@
 				788B6DEE260CC1E300AF2E84 /* CollectionCellViewModel.swift in Sources */,
 				788B6DEB260CB73B00AF2E84 /* CollectionViewCell.swift in Sources */,
 				78A9A8E5260B5A36003B7B72 /* NetworkManager.swift in Sources */,
+				78D01388260D30E8004053A7 /* ViewModelDelegate.swift in Sources */,
 				78F04FB0260602CB0001F53B /* AppDelegate.swift in Sources */,
 				78D8E2B2260656A700DBC662 /* ViewModel.swift in Sources */,
 				78F04FB2260602CB0001F53B /* SceneDelegate.swift in Sources */,

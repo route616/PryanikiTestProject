@@ -10,6 +10,8 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     static let identifier = "cell"
 
+    var selectedID: Int?
+
     var text: String? {
         didSet {
             guard let text = self.text else { return }
@@ -17,7 +19,7 @@ class CollectionViewCell: UICollectionViewCell {
             textLabel.frame = self.frame
             textLabel.text = text
             textLabel.textAlignment = .center
-            self.addSubview(textLabel)
+            addSubview(textLabel)
         }
     }
 
@@ -32,7 +34,10 @@ class CollectionViewCell: UICollectionViewCell {
                     withTitle: segment.value, at: segment.key - 1, animated: false
                 )
             }
-            self.addSubview(segmentedControl)
+            if let selectedSegment = selectedID {
+                segmentedControl.selectedSegmentIndex = selectedSegment - 1
+            }
+            addSubview(segmentedControl)
         }
     }
 
@@ -46,7 +51,7 @@ class CollectionViewCell: UICollectionViewCell {
             imageView.center = self.center
             imageView.contentMode = .scaleAspectFill
             imageView.image = image
-            self.addSubview(imageView)
+            addSubview(imageView)
         }
     }
 
