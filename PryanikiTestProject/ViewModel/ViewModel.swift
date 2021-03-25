@@ -9,22 +9,6 @@ import Alamofire
 import Foundation
 
 class ViewModel {
-    struct CellViewModel {
-        let name: String?
-        var text: String?
-        var image: Data?
-        var selectedID: Int?
-        var variants: [Int: String]?
-
-        init(name: String) {
-            self.name = name
-            self.text = nil
-            self.image = nil
-            self.selectedID = nil
-            self.variants = nil
-        }
-    }
-
     private var model: Response?
     private var tempImageData: Data?
 
