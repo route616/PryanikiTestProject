@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     // MARK: - ViewModel
     private var viewModel: ViewModel? {
         didSet {
-            if self.viewModel == nil { return }
+            guard let _ = self.viewModel else { return }
             collectionView.reloadData()
         }
     }
@@ -28,15 +28,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = ViewModel()
-        viewModel?.delegate = self
         view.addSubview(collectionView)
-    }
-}
-
-// MARK: - ViewModelDelegate
-extension ViewController: ViewModelDelegate {
-    func didFinishFetchingData() {
-        collectionView.reloadData()
     }
 }
 

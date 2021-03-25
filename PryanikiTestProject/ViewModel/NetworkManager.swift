@@ -13,8 +13,6 @@ final class NetworkManager {
     private init() {}
     private let urlAddress = "https://pryaniky.com/static/json/sample.json"
 
-    var delegate: NetworkManagerDelegate?
-
     func fetchData(handle: @escaping (Response) -> Void) {
         AF.request(urlAddress).responseDecodable(of: Response.self) { (response) in
             guard let value = response.value else { return }
