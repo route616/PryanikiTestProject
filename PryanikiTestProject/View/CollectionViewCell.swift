@@ -10,25 +10,26 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     static let identifier = "cell"
 
+    var textLabel = UILabel()
+    var imageView = UIImageView()
+    var segmentedControl = UISegmentedControl()
+
+    var delegate: CollectionViewCellDelegate?
+
     var selectedID: Int?
 
     var text: String? {
         didSet {
             guard let text = self.text else { return }
-            let textLabel = UILabel()
-            textLabel.frame = self.frame
             textLabel.text = text
             textLabel.textAlignment = .center
-            addSubview(textLabel)
+            textLabel.isHidden = false
         }
     }
 
     var selector: [Int: String]? {
         didSet {
             guard let selector = self.selector else { return }
-            let segmentedControl = UISegmentedControl()
-            segmentedControl.frame.size = CGSize(width: self.frame.width - 16, height: 44)
-            segmentedControl.center = self.center
             for segment in selector {
                 segmentedControl.insertSegment(
                     withTitle: segment.value, at: segment.key - 1, animated: false
@@ -37,7 +38,7 @@ class CollectionViewCell: UICollectionViewCell {
             if let selectedSegment = selectedID {
                 segmentedControl.selectedSegmentIndex = selectedSegment - 1
             }
-            addSubview(segmentedControl)
+            segmentedControl.isHidden = false
         }
     }
 
@@ -46,20 +47,43 @@ class CollectionViewCell: UICollectionViewCell {
             guard let imageData = self.image, let image = UIImage(data: imageData) else {
                 return
             }
-            let imageView = UIImageView()
-            imageView.frame = self.frame
-            imageView.center = self.center
-            imageView.contentMode = .scaleAspectFill
             imageView.image = image
-            addSubview(imageView)
+            imageView.isHidden = false
         }
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupSubviews()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setupSubviews()
+    }
+
+    private func setupSubviews() {
+        contentView.backgroundColor = .systemBackground
+        textLabel.center = contentView.center
+        textLabel.frame = contentView.frame
+        textLabel.isHidden = true
+
+        segmentedControl.frame.size = CGSize(width: contentView.frame.width, height: 44)
+        segmentedControl.center = contentView.center
+        segmentedControl.addTarget(self, action: #selector(changeSegment), for: .valueChanged)
+        segmentedControl.isHidden = true
+
+        imageView.center = contentView.center
+        imageView.frame = contentView.frame
+        imageView.contentMode = .scaleAspectFit
+        imageView.isHidden = true
+
+        addSubview(textLabel)
+        addSubview(segmentedControl)
+        addSubview(imageView)
+    }
+
+    @objc private func changeSegment(sender: UISegmentedControl) {
+        delegate?.didTappedSegment(sender: sender)
     }
 }

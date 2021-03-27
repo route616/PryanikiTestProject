@@ -9,26 +9,18 @@ import UIKit
 
 class ViewController: UIViewController {
     // MARK: - ViewModel
-    private var viewModel: ViewModel? {
-        didSet {
-            guard let _ = viewModel else { return }
-            collectionView.reloadData()
-        }
-    }
+    private var viewModel: ViewModel? 
 
     // MARK: - Collection View
-    private lazy var collectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: view.frame.width, height: view.frame.height / 4)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(
             CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier
         )
-        cv.frame.size = CGSize(width: view.bounds.width, height: view.bounds.height)
-        cv.delegate = self
-        cv.dataSource = self
-        cv.backgroundColor = .white
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.backgroundColor = .secondarySystemBackground
         return cv
     }()
 
@@ -37,7 +29,32 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         viewModel = ViewModel()
         viewModel?.delegate = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.frame = view.frame
         view.addSubview(collectionView)
+    }
+
+    private func presentSegmentInfo(with id: Int, and text: String) {
+        let alertController = UIAlertController(
+            title: "Selector", 
+            message: "Segment ID: \(id)\nText: \(text)", 
+            preferredStyle: .alert
+        )
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(action)
+        present(alertController, animated: true, completion: nil)
+    }
+
+    private func presentItemInfo(with name: String, and text: String) {
+        let alertController = UIAlertController(
+            title: "\(name)", 
+            message: "Item description: \(text)", 
+            preferredStyle: .actionSheet
+        )
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(action)
+        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -48,12 +65,13 @@ extension ViewController: ViewModelDelegate {
     }
 }
 
-//MARK: - UICollectionViewDelegate
+// MARK: - UICollectionViewDelegate
 extension ViewController: UICollectionViewDelegate {
-    func collectionView(
-        _ collectionView: UICollectionView, canEditItemAt indexPath: IndexPath
-    ) -> Bool {
-        return false
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presentItemInfo(
+            with: viewModel?.cells[indexPath.item].name ?? "No name", 
+            and: viewModel?.cells[indexPath.item].text ?? "No text"
+        )
     }
 }
 
@@ -82,6 +100,28 @@ extension ViewController: UICollectionViewDataSource {
         cell.text = cellViewModel.text
         cell.selectedID = cellViewModel.selectedID
         cell.selector = cellViewModel.variants
+        cell.delegate = self
         return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(
+        _ collectionView: UICollectionView, 
+        layout collectionViewLayout: UICollectionViewLayout, 
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height / 4)
+    }
+}
+
+// MARK: - CollectionViewCellDelegate
+extension ViewController: CollectionViewCellDelegate {
+    func didTappedSegment(sender: UISegmentedControl) {
+        presentSegmentInfo(
+            with: sender.selectedSegmentIndex + 1, 
+            and: sender.titleForSegment(at: sender.selectedSegmentIndex) ?? "No text"
+        )
     }
 }

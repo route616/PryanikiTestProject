@@ -48,6 +48,5 @@ class ViewModel {
             }
         }
         delegate?.didFinishFetchingData()
-        print(cells)
     }
 }

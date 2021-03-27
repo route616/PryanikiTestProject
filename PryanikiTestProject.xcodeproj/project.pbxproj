@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7805D560260F277F00F1DE9E /* CollectionViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7805D55F260F277F00F1DE9E /* CollectionViewCellDelegate.swift */; };
 		788B6DEB260CB73B00AF2E84 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788B6DEA260CB73B00AF2E84 /* CollectionViewCell.swift */; };
 		788B6DEE260CC1E300AF2E84 /* CollectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788B6DED260CC1E300AF2E84 /* CollectionCellViewModel.swift */; };
 		78A9A8E5260B5A36003B7B72 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A9A8E4260B5A36003B7B72 /* NetworkManager.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		1804F6D3734A90029BFE000F /* Pods-PryanikiTestProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PryanikiTestProject.debug.xcconfig"; path = "Target Support Files/Pods-PryanikiTestProject/Pods-PryanikiTestProject.debug.xcconfig"; sourceTree = "<group>"; };
 		3443932E8B2A11F168452BFF /* Pods_PryanikiTestProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PryanikiTestProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7805D55F260F277F00F1DE9E /* CollectionViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellDelegate.swift; sourceTree = "<group>"; };
 		788B6DEA260CB73B00AF2E84 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		788B6DED260CC1E300AF2E84 /* CollectionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellViewModel.swift; sourceTree = "<group>"; };
 		78A9A8E4260B5A36003B7B72 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			children = (
 				78F04FB3260602CB0001F53B /* ViewController.swift */,
 				788B6DEA260CB73B00AF2E84 /* CollectionViewCell.swift */,
+				7805D55F260F277F00F1DE9E /* CollectionViewCellDelegate.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				78A9A8E5260B5A36003B7B72 /* NetworkManager.swift in Sources */,
 				78D01388260D30E8004053A7 /* ViewModelDelegate.swift in Sources */,
 				78F04FB0260602CB0001F53B /* AppDelegate.swift in Sources */,
+				7805D560260F277F00F1DE9E /* CollectionViewCellDelegate.swift in Sources */,
 				78D8E2B2260656A700DBC662 /* ViewModel.swift in Sources */,
 				78F04FB2260602CB0001F53B /* SceneDelegate.swift in Sources */,
 				78D8E2B92606602E00DBC662 /* Response.swift in Sources */,
